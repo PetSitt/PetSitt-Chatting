@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const roomSchema = new mongoose.Schema({
-  userId_A: {
+  userId: {
     type: String,
     required: true,    
   },
-  userId_B: {
+  sitter_userId: {
     type: String,
     required: true,    
   },
@@ -17,6 +17,10 @@ const roomSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  newMessage: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 roomSchema.virtual("roomId").get(function () {

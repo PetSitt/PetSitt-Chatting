@@ -9,6 +9,10 @@ const chatSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  userName: {
+    type: String,
+    required: true,
+  },
   chatText: {
     type: String,
     required: true,
@@ -18,6 +22,10 @@ const chatSchema = new mongoose.Schema({
     default: new Date(),
     required: true,
   },
+  newMessage: {
+    type: Boolean,
+    default: true,
+  }  
 });
 
 chatSchema.virtual("chatId").get(function () {

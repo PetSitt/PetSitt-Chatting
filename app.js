@@ -4,7 +4,6 @@ const http = require("http");
 const cors = require('cors');
 const webSocket = require("./socket.js");
 const chatRouter = require("./routes/chats.js");
-const roomRouter = require("./routes/rooms.js");
 require("dotenv").config();
 
 const app = express();
@@ -14,12 +13,22 @@ const server = http.createServer(app);
 
 connect_MongoDB(); //DB 연결
 
-app.use(cors());
+app.use(cors({
+  exposedHeaders: ["authorization"],
+  origin: '*', //출처 허용 옵션: 테스트용 - 전부허용!
+  credentials: 'true', // 사용자 인증이 필요한 리소스(쿠키..등) 접근
+}));
+
 app.use(express.static("static"));
 app.use(express.json()); // json형태의 데이터를 parsing하여 사용할 수 있게 만듦.
 app.use(express.urlencoded({extended:false}));
 
-app.use('/rooms', roomRouter);
+app.use((req, res, next) => {
+  console.log('Request URL:', req.originalUrl, ' - ', new Date());
+  next();
+});
+
+
 app.use('/chats', chatRouter);
 
 // 채팅 관련
