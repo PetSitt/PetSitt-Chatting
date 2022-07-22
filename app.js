@@ -7,8 +7,8 @@ const chatRouter = require("./routes/chats.js");
 require("dotenv").config();
 
 const app = express();
-// const port = process.env.CHAT_PORT || 8000;
-const port = 8000;
+const port = process.env.CHAT_PORT || 8000;
+// const port = 8000;
 const server = http.createServer(app);
 
 connect_MongoDB(); //DB 연결
@@ -24,10 +24,9 @@ app.use(express.json()); // json형태의 데이터를 parsing하여 사용할 �
 app.use(express.urlencoded({extended:false}));
 
 app.use((req, res, next) => {
-  console.log('Request URL:', req.originalUrl, ' - ', new Date());
+  console.log(`Request URL: [${req.method}] -`, req.originalUrl, ' - ', new Date());
   next();
 });
-
 
 app.use('/chats', chatRouter);
 

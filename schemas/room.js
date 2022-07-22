@@ -15,7 +15,7 @@ const roomSchema = new mongoose.Schema({
   },
   lastChatAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
   newMessage: {
     type: Boolean,

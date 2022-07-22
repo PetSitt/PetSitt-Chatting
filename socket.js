@@ -16,10 +16,8 @@ module.exports = (server, app) => {
     
     //내 개인방을 만든다.
     socket.on("join_my_room", (userEmail) => {
-      console.log("조인마이룸 들어왔습니다.====================");
       socket.data.userEmail = userEmail;
       socket.join(userEmail);
-      console.log("소켓룸:", socket.rooms);
       console.log(`ID: ${socket.id} joined my room: ${userEmail}`);
       console.log("모든방 정보", io.of("/").adapter.rooms);
     });
